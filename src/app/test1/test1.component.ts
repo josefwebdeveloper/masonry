@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-test1',
@@ -6,13 +6,17 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
   styleUrls: ['./test1.component.scss']
 })
 export class Test1Component implements OnInit, AfterViewInit {
-
+  @HostListener('document:resize', ['$event'])
+  // tslint:disable-next-line:typedef
+  onDocumentRemoteEvent(ev: any) {
+    this.resizeAllGridItems();
+  }
   constructor() {
   }
 
   ngAfterViewInit() {
     this.resizeAllGridItems();
-    window.addEventListener('resize', this.resizeAllGridItems.bind(this));
+    // window.addEventListener('resize', this.resizeAllGridItems.bind(this));
 
   }
 
